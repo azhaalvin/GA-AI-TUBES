@@ -45,9 +45,33 @@ def carifendanfit (x): #pemecahan idnividu menjadi kromosom ,hasil output list y
         f.append(fittnes)
     return f
 
-def parenting(p,g): #p = pupulasi,g=genotype 
-    results = random.choices(p,weights=(g[0],g[1],g[2],g[3]),k=4)
+def parenting(g): #p = pupulasi,g=genotype menentukan paren yang akan di pakai 
+    p = [0,1,2,3,4,5]
+    n= 0
+    for i in range(len(g)):
+        n=g[i]+n
+    results = random.choices(p,weights=((g[0]/n),(g[1]/n),(g[2]/n),(g[3]/n),(g[4]/n),(g[5]/n)),k=4)
     return results 
+
+def crossover(po,pa1,pa2):
+    x=[]
+    for i in range(len(pa1)):
+        if i <= po[0]:
+            x.append(pa1[i])
+        if i > po[0]:
+            x.append(pa2[i])
+    return x
+
+def anak(pa,cl): # crossover dari orang tua
+    cild=[]
+    point=[0,1,2,3,4,5,6,7,8,9,10]
+    po = random.choices(point)
+    print(po)
+    cild.append(crossover(po,pa[cl[0]],pa[cl[1]]))
+    cild.append(crossover(po,pa[cl[1]],pa[cl[0]]))
+    cild.append(crossover(po,pa[cl[2]],pa[cl[3]]))
+    cild.append(crossover(po,pa[cl[3]],pa[cl[2]]))
+    return cild
 
 
                 
@@ -59,8 +83,13 @@ p=fungsi_populasi()
 print(p)
 print("========")
 fitnes=carifendanfit(p)
-print(fitnes)
+#print(fitnes)
 print("=========")
-
+pa=parenting(fitnes)
+print(pa)
+print("=========")
+cild=anak(p,pa)
+print(cild)
+print("=========")
 
 
