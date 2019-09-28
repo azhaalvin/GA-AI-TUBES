@@ -3,50 +3,64 @@ import random
 
 def fungsi_populasi ():
     biner = [1,0]
-    results = random.choices(biner,k=12)
+    results =[]
+    for i in range(6):
+        individu = random.choices(biner,k=12)
+        results.append(individu)
     return results
 
 def fungsi (x1,x2):
      hasil = (4 - 2.1 * (x1 ** 2) + ((x1 ** 4)/3)) * x1**2 + x1 * x2 + (-4 + 4 * x2**2) * x2**2
      return hasil
 
-def rumusKromosom (rmin,rmax,x):
+def rumusKromosom (rmin,rmax,x): #mencari fenotype
     g= 0
     sgm= 0
-    for i in range(5):
+    for i in range(len(x)):
         n= (i+1)*-1
         g= g + x[i]*2**n
         sgm= sgm+ 2**n
     hasil_fen = rmin+((rmax-rmin)/sgm)*g 
     return hasil_fen
 
-def splitindv (x):
+def carifendanfit (x): #pemecahan idnividu menjadi kromosom ,hasil output list yang berisi fittnes
+    rmin1=-3
+    rmax1=3
+    rmin2=-2
+    rmax2=2
     n=len(x)
     n=(n/2)
     c1=[]
     c2=[]
-    for i in range(len(x)):
-        if i+1 <= (n):
-            c1.append(x[i]) 
-        if i+1 > (n):
-            c2.append(x[i])
-    z=[]
-    x=[c1,c2]
-    z.append(x)
+    f=[]
+    for ii in range(len(x)):
+        for i in range(len(x[0])):
+            if i+1 <= (n):
+                c1.append(x[ii][i]) 
+            if i+1 > (n):
+                c2.append(x[ii][i])
+        fen1=rumusKromosom(rmin1,rmax1,c1)
+        fen2=rumusKromosom(rmin2,rmax2,c2)
+        fittnes=fungsi(fen1,fen2)
+        f.append(fittnes)
+    return f
+
+def parenting(p,g): #p = pupulasi,g=genotype 
+    results = random.choices(p,weights=(g[0],g[1],g[2],g[3]),k=4)
+    return results 
+
+
+                
+
 
 #main program
-rmin1=-3
-rmax1=3
-rmin2=-2
-rmax2=2
-x1= fungsi_populasi()
-x2= fungsi_populasi()
-print(x1)
-print(x2)
-fen1= rumusKromosom(rmin1,rmax1,x1)
-fen2= rumusKromosom(rmin2,rmax2,x2)
-print(fen1)
-print(fen2)
+
+p=fungsi_populasi()
+print(p)
+print("========")
+fitnes=carifendanfit(p)
+print(fitnes)
+print("=========")
 
 
 
