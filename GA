@@ -1,0 +1,55 @@
+import random
+
+
+def fungsi_populasi ():
+    biner = [1,0]
+    results = random.choices(biner,k=12)
+    return results
+
+def fungsi (x1,x2):
+     hasil = (4 - 2.1 * (x1 ** 2) + ((x1 ** 4)/3)) * x1**2 + x1 * x2 + (-4 + 4 * x2**2) * x2**2
+     return hasil
+
+def rumusKromosom (rmin,rmax,x):
+    g= 0
+    sgm= 0
+    for i in range(5):
+        n= (i+1)*-1
+        g= g + x[i]*2**n
+        sgm= sgm+ 2**n
+    hasil_fen = rmin+((rmax-rmin)/sgm)*g 
+    return hasil_fen
+
+def splitindv (x):
+    n=len(x)
+    n=(n/2)
+    c1=[]
+    c2=[]
+    for i in range(len(x)):
+        if i+1 <= (n):
+            c1.append(x[i]) 
+        if i+1 > (n):
+            c2.append(x[i])
+    z=[]
+    x=[c1,c2]
+    z.append(x)
+
+                
+
+
+#main program
+rmin1=-3
+rmax1=3
+rmin2=-2
+rmax2=2
+x1= fungsi_populasi()
+x2= fungsi_populasi()
+print(x1)
+print(x2)
+fen1= rumusKromosom(rmin1,rmax1,x1)
+fen2= rumusKromosom(rmin2,rmax2,x2)
+print(fen1)
+print(fen2)
+
+
+
