@@ -34,9 +34,6 @@ def splitindv (x):
     x=[c1,c2]
     z.append(x)
 
-                
-
-
 #main program
 rmin1=-3
 rmax1=3
