@@ -72,7 +72,6 @@ def anak(pa,cl): # crossover dari orang tua
     cild.append(crossover(po,pa[cl[2]],pa[cl[3]]))
     cild.append(crossover(po,pa[cl[3]],pa[cl[2]]))
     return cild
-
 def mutasi(cild):
     jml=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
     for ii in range(len(cild)):
@@ -82,7 +81,7 @@ def mutasi(cild):
                 cild[ii][i] = 0
             if (a[0] <= 0.1) and (cild[ii][i] == 0):
                 cild[ii][i] = 1
-    return()
+    return(cild)
 
 def pergantiangen(g1,g2,p,cl):
     ii=0
@@ -117,6 +116,7 @@ def pergantiangen(g1,g2,p,cl):
             p[i] = cl[ii]
             a4=i
         i += 1
+    return(p)
 
                 
 
@@ -126,24 +126,25 @@ def pergantiangen(g1,g2,p,cl):
 p=fungsi_populasi()
 print(p)
 print("========")
-fitnesP=carifendanfit(p)
-#print(fitnes)
-print("=========")
-pa=parenting(fitnesP)
-print(pa)
-print("=========")
-cild=anak(p,pa)
-print(cild)
-print("=========")
-cild=mutasi(cild)
-print(cild)
-print("=========")
-fitnesC=carifendanfit(cild)
-print(fitnesC)
-print("=========")
-p=pergantiangen(fitnesP,fitnesC,p,cild)
+for i in range(7):
+    fitnesP=carifendanfit(p)
+    print(fitnesP)
+    print("=========")
+    pa=parenting(fitnesP)
+    print(pa)
+    print("=========")
+    cild=anak(p,pa)
+    print(cild)
+    print("=========")
+    cild=mutasi(cild)
+    print(cild)
+    print("=========")
+    fitnesC=carifendanfit(cild)
+    print(fitnesC)
+    print("=========")
+    p=pergantiangen(fitnesP,fitnesC,p,cild)
+    print(p)
+    print("=========")
+
+print("xxxxxxxxxxxxxxxxxxxx")
 print(p)
-print("=========")
-
-
-
